@@ -13,11 +13,6 @@ const userSlice = createSlice({
     setError: (state, action) => {
       state.error = action.payload;
     },
-    updateNicknameSuccess: (state, action) => {
-      if (state.userInfo) {
-        state.userInfo.nickname = action.payload;
-      }
-    },
     clearUserInfo: (state) => {
       state.userInfo = null;
       state.error = null;
@@ -25,5 +20,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { setUserInfo, setError, updateNicknameSuccess, clearUserInfo } = userSlice.actions;
+export const { setUserInfo, setError, clearUserInfo } = userSlice.actions;
 export default userSlice.reducer;

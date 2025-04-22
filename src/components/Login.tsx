@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../app/store";
 import { login } from "../app/auth/authSlice";
-import { setUserInfo } from "../app/user/userSclice";
+import { setUserInfo } from "../app/user/userSlice";
 import { appTitle } from "../globals/globalVariables";
 import { api } from "../api/axios";
 import { isAxiosError } from "axios";
@@ -12,41 +12,37 @@ const Login = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
-  const [inputEmail, setInputEmail] = useState<string>("");
+  const [inputUsername, setInputUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
 
   const handleLogIn = async (): Promise<void> => {
-    const trimmedEmail = inputEmail.trim();
+    const trimmedUsername = inputUsername.trim();
 
-    if (!trimmedEmail || !password) {
-      setError("Please enter both email and password.");
+    if (!trimmedUsername || !password) {
+      setError("Please enter both username and password.");
       return;
     }
 
     try {
-      // json-server 방식: email + password 조회
-      const response = await api.get(`/users?email=${trimmedEmail}&password=${password}`);
+      // json-server 방식: username + password 검색
+      const response = await api.get(`/users?username=${trimmedUsername}&password=${password}`);
       const user = response.data[0];
 
       if (!user) {
-        setError("Invalid email or password.");
+        setError("Invalid username or password.");
         return;
       }
 
-      // mock 토큰 사용
       const mockToken = "mock-token";
 
-      // localStorage 저장
       localStorage.setItem("accessToken", mockToken);
       localStorage.setItem("user", JSON.stringify(user));
 
-      // Redux 상태 저장
       dispatch(setUserInfo(user));
       dispatch(login());
 
-      // 초기화 및 이동
-      setInputEmail("");
+      setInputUsername("");
       setPassword("");
       setError("");
       navigate("/dashboard");
@@ -67,11 +63,11 @@ const Login = () => {
 
       <div>
         <input
-          id="email"
-          type="email"
-          value={inputEmail}
-          onChange={(e) => setInputEmail(e.target.value)}
-          placeholder="Enter your email"
+          id="username"
+          type="text"
+          value={inputUsername}
+          onChange={(e) => setInputUsername(e.target.value)}
+          placeholder="Enter your username"
         />
       </div>
 
@@ -90,7 +86,7 @@ const Login = () => {
       <button onClick={handleLogIn}>Log In</button>
 
       <p>
-        Don't have an account? <Link to="/register">Sign up here</Link>
+        Don't have an account? <Link to="/signup">Sign up here</Link>
       </p>
     </div>
   );

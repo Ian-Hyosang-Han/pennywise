@@ -1,9 +1,8 @@
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "../app/store";
 import { logout } from "../app/auth/authSlice";
-import { clearUserInfo } from "../app/user/userSclice";
+import { clearUserInfo } from "../app/user/userSlice";
 import { useState } from "react";
-import Modal from "./Modal";
 
 const Header = () => {
   const nickname = useSelector((state: RootState) => state.user.userInfo?.nickname);
