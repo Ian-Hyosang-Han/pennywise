@@ -26,7 +26,9 @@ const Login = () => {
 
     try {
       // json-server 방식: username + password 검색
-      const response = await api.get(`/users?username=${trimmedUsername}&password=${password}`);
+      const response = await api.get(
+        `/users?username=${trimmedUsername}&password=${password}`
+      );
       const user = response.data[0];
 
       if (!user) {
@@ -56,37 +58,48 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <header>
-        <h1>{appTitle}</h1>
-      </header>
+    <div className="w-full min-h-screen flex flex-col justify-center items-center">
+      <h1 className="flex flex-low justify-center items-center mb-2">
+        <img src="/logo.png" className="w-24" alt="logo" />
+        <span className="font-Mon text-[50px] font-bold">{appTitle}</span>
+      </h1>
 
-      <div>
+      <div className="ml-5 ">
         <input
+          className="w-[380px] h-[50px] px-2 py-2 bg-white block mb-5 border-2 rounded-md border-[#757575]"
           id="username"
           type="text"
           value={inputUsername}
           onChange={(e) => setInputUsername(e.target.value)}
-          placeholder="Enter your username"
+          placeholder="ID first... Budget later..."
         />
-      </div>
+        {/* </div>
 
-      <div>
+      <div> */}
         <input
+          className="w-[380px] h-[50px] px-2 py-2 bg-white block mb-5 border-2 rounded-md border-[#757575]"
           id="password"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          placeholder="Enter your password"
+          placeholder="Spend wisely... Type wisely..."
         />
       </div>
 
-      {error && <p>{error}</p>}
+      {error && <p style={{ color: "red" }}>{error}</p>}
 
-      <button onClick={handleLogIn}>Log In</button>
+      <button
+        className="font-Han ml-5 mb-5 w-[380px] text-3xl text-white px-2 py-2 bg-[#6BC1B4] hover:bg-[#5CAEA2] transition-colors duration-200 block rounded-md cursor-pointer"
+        onClick={handleLogIn}
+      >
+        Log In
+      </button>
 
-      <p>
-        Don't have an account? <Link to="/signup">Sign up here</Link>
+      <p className="font-Raj text-[#434343] text-2xl">
+        Don't have an account?{" "}
+        <Link to="/signup">
+          <strong>Sign up here</strong>
+        </Link>
       </p>
     </div>
   );

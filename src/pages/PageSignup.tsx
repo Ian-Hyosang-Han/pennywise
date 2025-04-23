@@ -1,24 +1,30 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../app/store';
-import { login } from '../app/auth/authSlice';
-import { setUserInfo } from '../app/user/userSlice';
-import { useNavigate } from 'react-router-dom';
-import { api } from '../api/axios';
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../app/store";
+import { login } from "../app/auth/authSlice";
+import { setUserInfo } from "../app/user/userSlice";
+import { useNavigate } from "react-router-dom";
+import { api } from "../api/axios";
 import { isAxiosError } from "axios";
-import { appTitle } from '../globals/globalVariables';
+import { appTitle } from "../globals/globalVariables";
 
 const PageSignup = () => {
-  const [username, setUsername] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [error, setError] = useState<string>('');
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const [error, setError] = useState<string>("");
 
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
   const handleRegister = async () => {
-    if (!username.trim() || !password.trim()) {
-      setError('Please enter both username and password.');
+    if (!username.trim() || !password.trim() || !confirmPassword.trim()) {
+      setError("Please fill in all fields.");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setError("Passwords do not match.");
       return;
     }
 
@@ -31,21 +37,21 @@ const PageSignup = () => {
       }
 
       // 회원가입 요청 (json-server용)
-      const res = await api.post('/users', {
+      const res = await api.post("/users", {
         username: username.trim(),
         password: password.trim(),
       });
 
       const user = res.data;
-      const mockToken = 'mock-token';
+      const mockToken = "mock-token";
 
       // 저장
-      localStorage.setItem('accessToken', mockToken);
-      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem("accessToken", mockToken);
+      localStorage.setItem("user", JSON.stringify(user));
 
       dispatch(setUserInfo(user));
       dispatch(login());
-      navigate('/dashboard');
+      navigate("/");
     } catch (err: unknown) {
       if (isAxiosError(err)) {
         setError(err.response?.data?.message || "Registration failed.");
@@ -56,13 +62,21 @@ const PageSignup = () => {
   };
 
   return (
-    <main>
+    <main className="w-full min-h-screen flex flex-col justify-center items-center">
       <section>
-        <h2>Sign-up for {appTitle}</h2>
+        <h2 className="font-Mon text-3xl font-bold mb-2">
+          Sign-up for {appTitle}
+        </h2>
 
         <div>
-          <label htmlFor="username">Username:</label>
+          <label
+            className="font-Raj text-[#434343] text-2xl font-medium"
+            htmlFor="username"
+          >
+            Username:
+          </label>
           <input
+            className="w-[380px] h-[50px] px-2 py-2 bg-white block mb-2 border-2 rounded-md border-[#757575]"
             id="username"
             type="text"
             value={username}
@@ -71,9 +85,15 @@ const PageSignup = () => {
           />
         </div>
 
-        <div>
-          <label htmlFor="password">Password:</label>
+        <div className="mb-4">
+          <label
+            className="font-Raj text-[#434343] text-2xl font-medium"
+            htmlFor="password"
+          >
+            Password:
+          </label>
           <input
+            className="w-[380px] h-[50px] px-2 py-2 bg-white block mb-2 border-2 rounded-md border-[#757575]"
             id="password"
             type="password"
             value={password}
@@ -82,9 +102,32 @@ const PageSignup = () => {
           />
         </div>
 
-        {error && <p style={{ color: 'red' }}>{error}</p>}
+        {/* ✅ Confirmpassword */}
+        <div className="mb-4">
+          <label
+            className="font-Raj text-[#434343] text-2xl font-medium"
+            htmlFor="confirmPassword"
+          >
+            Confirm Password:
+          </label>
+          <input
+            className="w-[380px] h-[50px] px-2 py-2 bg-white block mb-2 border-2 rounded-md border-[#757575]"
+            id="confirmPassword"
+            type="password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            placeholder="Re-enter password"
+          />
+        </div>
 
-        <button onClick={handleRegister}>Sign Up</button>
+        {error && <p style={{ color: "red" }}>{error}</p>}
+
+        <button
+          className="font-Han mb-5 w-[380px] text-3xl text-white px-2 py-2 bg-[#6BC1B4] hover:bg-[#5CAEA2] transition-colors duration-200 block rounded-md cursor-pointer"
+          onClick={handleRegister}
+        >
+          Sign Up
+        </button>
       </section>
     </main>
   );

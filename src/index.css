@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+body {
+  background-color: #fffff0;
+}
+
+/* ========================================
+======== FONT-STYLES FOR TAILWIND =========
+======================================== */
+
+.font-Han {
+  font-family: 'Black Han Sans', sans-serif;
+}
+
+.font-Raj {
+  color: #434343;
+  font-family: 'Rajdhani', sans-serif;
+}
+
+.font-Mon {
+  color: #434343;
+  font-family: 'Montserrat Alternates', sans-serif;
+}

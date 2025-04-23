@@ -1,16 +1,27 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+interface UserInfo {
+  username: string;
+}
+
+interface UserState {
+  userInfo: UserInfo | null;
+  error: string | null;
+}
+
+const initialState: UserState = {
+  userInfo: null,
+  error: null,
+};
+
 const userSlice = createSlice({
   name: 'user',
-  initialState: {
-    userInfo: null,
-    error: null,
-  },
+  initialState,
   reducers: {
-    setUserInfo: (state, action) => {
+    setUserInfo: (state, action: { payload: UserInfo }) => {
       state.userInfo = action.payload;
     },
-    setError: (state, action) => {
+    setError: (state, action: { payload: string }) => {
       state.error = action.payload;
     },
     clearUserInfo: (state) => {
