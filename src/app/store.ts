@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './auth/authSlice';
-import userReducer from './user/userSclice';
+import userReducer from './user/userSlice';
 import expenseDataReducer from './expense/expenseDataSlice';
 
 const store = configureStore({
@@ -13,5 +13,4 @@ const store = configureStore({
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
-
 export default store;

@@ -1,55 +1,18 @@
-# React + TypeScript + Vite
+## PennyWise
+PennyWise is an ongoing personal project designed to help users track their daily expenses efficiently and visually. Built with React, TypeScript, and Tailwind CSS, the app allows users to add, view, and delete expenses with a clean and responsive UI. It features monthly filtering, categorized spending summaries with icon-based visualizations, and dynamic graph animations.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Key technologies and tools used:
 
-Currently, two official plugins are available:
+🧠 React & TypeScript: Component-based architecture with strong type safety.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🎨 Tailwind CSS: Utility-first styling for fast and scalable UI development.
 
-## Expanding the ESLint configuration
+🔄 React Query (@tanstack/react-query): For fetching, caching, and synchronizing expense data.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+📦 json-server: Used as a mock backend to simulate API operations (CRUD).
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+📊 Custom bar graph: Visual summary of monthly expenses by category.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+📁 Organized component structure with reusable hooks and modular styling.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
-# pennywise
+This project reflects my focus on user experience, frontend architecture, and practical use of modern React ecosystem tools.
