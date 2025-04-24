@@ -12,6 +12,7 @@ Key technologies and tools used:
 📦 json-server: Used as a mock backend to simulate API operations (CRUD).
 
 📊 Custom bar graph: Visual summary of monthly expenses by category.
+<<<<<<< HEAD
 
 📁 Organized component structure with reusable hooks and modular styling.
 
@@ -19,3 +20,9 @@ This project reflects my focus on user experience, frontend architecture, and pr
 
 
 
+=======
+
+📁 Organized component structure with reusable hooks and modular styling.
+
+This project reflects my focus on user experience, frontend architecture, and practical use of modern React ecosystem tools.
+>>>>>>> cf54c92 (Changed the README file content and added the .env file to .gitignore to prevent it from being tracked)
