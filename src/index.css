@@ -9,15 +9,49 @@ body {
 ======================================== */
 
 .font-Han {
-  font-family: 'Black Han Sans', sans-serif;
+  font-family: "Black Han Sans", sans-serif;
 }
 
 .font-Raj {
   color: #434343;
-  font-family: 'Rajdhani', sans-serif;
+  font-family: "Rajdhani", sans-serif;
 }
 
 .font-Mon {
   color: #434343;
-  font-family: 'Montserrat Alternates', sans-serif;
+  font-family: "Montserrat Alternates", sans-serif;
+}
+
+.font-btn {
+  font-family: "Poppins", sans-serif;
+}
+
+/* ========================================
+============== GRAPH STYLES ===============
+======================================== */
+
+@layer utilities {
+  .skeleton {
+    @apply bg-gray-200 relative overflow-hidden;
+  }
+
+  .skeleton::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -150px;
+    height: 100%;
+    width: 150px;
+    background: linear-gradient(to right, #f0f0f0 0%, #e0e0e0 50%, #f0f0f0 100%);
+    animation: shimmer 1.5s infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(300px);
+    }
+  }
 }

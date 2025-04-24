@@ -6,5 +6,42 @@
       "password": "12345aaa"
     }
   ],
-  "expenses": []
+  "expenses": [
+    {
+      "id": "10d0e968-94b6-46aa-b2e3-b8f62a8e9f76",
+      "date": "2025-04-22",
+      "item": "Books",
+      "amount": 300,
+      "description": "gift",
+      "createdBy": "hhan330",
+      "userId": "d9da"
+    },
+    {
+      "id": "d7a9aa27-ce40-4d1c-9f48-6a204eeef0a3",
+      "date": "2025-04-16",
+      "item": "Shopping",
+      "amount": 550,
+      "description": "clothings",
+      "createdBy": "hhan330",
+      "userId": "d9da"
+    },
+    {
+      "id": "48848d38-b799-4234-83bf-543fb1c63c52",
+      "date": "2025-04-01",
+      "item": "Beauty",
+      "amount": 123,
+      "description": "launch",
+      "createdBy": "hhan330",
+      "userId": "d9da"
+    },
+    {
+      "id": "0f44828c-4d65-4db0-bbd6-77a9c41fff14",
+      "date": "2025-04-01",
+      "item": "Food",
+      "amount": 100,
+      "description": "launch",
+      "createdBy": "hhan330",
+      "userId": "d9da"
+    }
+  ]
 }

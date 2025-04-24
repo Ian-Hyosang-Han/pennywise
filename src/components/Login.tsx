@@ -89,7 +89,7 @@ const Login = () => {
       {error && <p style={{ color: "red" }}>{error}</p>}
 
       <button
-        className="font-Han ml-5 mb-5 w-[380px] text-3xl text-white px-2 py-2 bg-[#6BC1B4] hover:bg-[#5CAEA2] transition-colors duration-200 block rounded-md cursor-pointer"
+        className="font-btn font-bold ml-5 mb-5 w-[380px] text-3xl text-white px-2 py-2 bg-[#6BC1B4] hover:bg-[#5CAEA2] transition-colors duration-200 block rounded-md cursor-pointer"
         onClick={handleLogIn}
       >
         Log In

@@ -39,7 +39,7 @@ const Header = () => {
         {isModalOpen && <MypageModal onClose={toggleModal} />}
         <button
           onClick={handleLogout}
-          className="font-Han px-4 py-2 bg-[#6BC1B4] text-white rounded-md hover:bg-[#5CAEA2] transition-colors duration-200 block cursor-pointer"
+          className="font-btn font-bold text-[20px] px-2 py-1 bg-[#6BC1B4] text-white rounded-md hover:bg-[#5CAEA2] transition-colors duration-200 block cursor-pointer"
         >
           Log out
         </button>
