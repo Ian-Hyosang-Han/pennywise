@@ -3,16 +3,7 @@ import icons from "../assets/graph/icons";
 import SkeletonBar from "../assets/styles/SkeletonBar";
 import SkeletonCircle from "../assets/styles/SkeletonCircle";
 import { useExpenses } from "../app/useexpenses/useExpenses";
-
-interface Expense {
-  id: string;
-  date: string;
-  item: string;
-  amount: number;
-  description: string;
-  createdBy: string;
-  userId: string;
-}
+import { Expense } from "../types/expense";
 
 const COLORS = [
   "#93CDE9",

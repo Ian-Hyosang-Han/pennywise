@@ -24,24 +24,6 @@
       "description": "clothings",
       "createdBy": "hhan330",
       "userId": "d9da"
-    },
-    {
-      "id": "48848d38-b799-4234-83bf-543fb1c63c52",
-      "date": "2025-04-01",
-      "item": "Beauty",
-      "amount": 123,
-      "description": "launch",
-      "createdBy": "hhan330",
-      "userId": "d9da"
-    },
-    {
-      "id": "0f44828c-4d65-4db0-bbd6-77a9c41fff14",
-      "date": "2025-04-01",
-      "item": "Food",
-      "amount": 100,
-      "description": "launch",
-      "createdBy": "hhan330",
-      "userId": "d9da"
     }
   ]
 }

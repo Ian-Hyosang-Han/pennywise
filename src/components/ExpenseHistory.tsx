@@ -1,14 +1,6 @@
-import { useNavigate } from "react-router-dom";
-
-interface Expense {
-  id: string;
-  date: string;
-  item: string;
-  amount: number;
-  description: string;
-  createdBy: string;
-  userId: string;
-}
+import { useState } from "react";
+import { Expense } from "../types/expense";
+import ConfirmModal from "./ConfirmModal";
 
 interface ExpenseHistoryProps {
   expenseData: Expense[];
@@ -16,17 +8,25 @@ interface ExpenseHistoryProps {
 }
 
 const ExpenseHistory = ({ expenseData, onDelete }: ExpenseHistoryProps) => {
-  const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
 
-  const handleDetail = (id: string) => {
-    navigate(`/detail/${id}`);
+  const handleDeleteClick = (id: string) => {
+    setSelectedId(id);
+    setIsModalOpen(true);
   };
 
-  const handleDelete = (id: string) => {
-    const confirmed = window.confirm("Are you sure you want to delete this expense?");
-    if (confirmed) {
-      onDelete(id);
+  const handleConfirmDelete = () => {
+    if (selectedId) {
+      onDelete(selectedId);
+      setSelectedId(null);
     }
+    setIsModalOpen(false);
+  };
+
+  const handleCancelDelete = () => {
+    setSelectedId(null);
+    setIsModalOpen(false);
   };
 
   return (
@@ -40,10 +40,7 @@ const ExpenseHistory = ({ expenseData, onDelete }: ExpenseHistoryProps) => {
               key={expense.id}
               className="flex justify-between items-center p-4 bg-white shadow-md mb-2 rounded"
             >
-              <div
-                className="w-4/5 overflow-hidden cursor-pointer"
-                onClick={() => handleDetail(expense.id)}
-              >
+              <div className="w-4/5 overflow-hidden">
                 <span className="font-Mon text-xs text-gray-500 mr-2">
                   {expense.date}
                 </span>
@@ -59,7 +56,7 @@ const ExpenseHistory = ({ expenseData, onDelete }: ExpenseHistoryProps) => {
                   {`${expense.amount} CAD`}
                 </span>
                 <button
-                  onClick={() => handleDelete(expense.id)}
+                  onClick={() => handleDeleteClick(expense.id)}
                   className="font-btn font-bold bg-red-400 hover:bg-red-500 text-white px-2 py-1 rounded text-sm"
                 >
                   Delete
@@ -69,6 +66,14 @@ const ExpenseHistory = ({ expenseData, onDelete }: ExpenseHistoryProps) => {
           ))}
         </ul>
       )}
+
+      {/* Confirm Modal */}
+      <ConfirmModal
+        isOpen={isModalOpen}
+        onConfirm={handleConfirmDelete}
+        onCancel={handleCancelDelete}
+        message="Are you sure you want to delete this expense?"
+      />
     </section>
   );
 };

@@ -8,16 +8,8 @@ import {
   useDeleteExpense,
 } from "../app/useexpenses/useExpenses";
 import ExpenseGraph from "../components/ExpenseGraph";
-
-interface Expense {
-  id: string;
-  date: string;
-  item: string;
-  amount: number;
-  description: string;
-  createdBy: string;
-  userId: string;
-}
+import { Expense } from "../types/expense";
+import YearlyExpense from "../components/YearlyExpense";
 
 const PageHome = () => {
   const { data: expenseData = [] } = useExpenses();
@@ -52,6 +44,7 @@ const PageHome = () => {
 
   return (
     <section className="page-home">
+      <YearlyExpense />
       <MonthlyExpense selectedMonth={selectedMonth} onChangeMonth={handleChangeMonth} />
       <ExpenseGraph selectedMonth={selectedMonth} />
       <ExpenseForm onExpenseData={onExpenseData} />

@@ -12,16 +12,22 @@ import PageHome from "../pages/PageHome";
 import PageNotFound from "../pages/PageNotFound";
 
 import { checkAuth } from "../app/auth/authSlice";
+import { setUserInfo } from "../app/user/userSlice";
 
 function AppRouter() {
-
   const dispatch = useDispatch<AppDispatch>();
-  const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.auth.isAuthenticated
+  );
 
   useEffect(() => {
     dispatch(checkAuth())
       .unwrap()
       .catch((err) => console.error("auth check failed", err));
+    const savedUser = localStorage.getItem("user");
+    if (savedUser) {
+      dispatch(setUserInfo(JSON.parse(savedUser)));
+    }
   }, [dispatch]);
 
   return (
@@ -31,7 +37,9 @@ function AppRouter() {
         <Route element={<ContentLayout />}>
           <Route
             path="/"
-            element={isAuthenticated ? <PageHome /> : <Navigate to="/login" replace />}
+            element={
+              isAuthenticated ? <PageHome /> : <Navigate to="/login" replace />
+            }
           />
         </Route>
 
@@ -39,11 +47,15 @@ function AppRouter() {
         <Route element={<BasicLayout />}>
           <Route
             path="/login"
-            element={isAuthenticated ? <Navigate to="/" replace /> : <PageLogin />}
+            element={
+              isAuthenticated ? <Navigate to="/" replace /> : <PageLogin />
+            }
           />
           <Route
             path="/signup"
-            element={isAuthenticated ? <Navigate to="/" replace /> : <PageSignup />}
+            element={
+              isAuthenticated ? <Navigate to="/" replace /> : <PageSignup />
+            }
           />
         </Route>
 

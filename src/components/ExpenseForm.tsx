@@ -1,21 +1,11 @@
 import { useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
-
-interface Expense {
-  id: string;
-  date: string;
-  item: string;
-  amount: number;
-  description: string;
-  createdBy: string;
-  userId: string;
-}
+import { Expense } from "../types/expense";
 
 interface ExpenseFormProps {
   onExpenseData: (expense: Expense) => void;
 }
 
-// 카테고리 목록 (icons 객체 키 기준)
 const categoryOptions = [
   "Beauty", "Books", "Shopping", "Food", "Snacks",
   "Travel", "Education", "Fitness", "Events", "Health",
