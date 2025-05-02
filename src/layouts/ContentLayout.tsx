@@ -1,18 +1,21 @@
 import { Outlet } from "react-router-dom";
 import Header from "../components/Header";
-import Footer from "../components/Footer";
+// import Footer from "../components/Footer";
+import SideNavBar from "../components/SideNavBar";
 
-/**
- * 로그인 후 내부 페이지 레이아웃 (Header/Footer 포함)
- */
+/** After Login Content Layout (include Header/Footer) */
+
 const ContentLayout = () => {
   return (
-    <div className="content-layout">
+    <div className="flex flex-col h-screen overflow-hidden">
       <Header />
-      <main className="main-content">
-        <Outlet />
-      </main>
-      <Footer />
+      <div className="flex flex-1 overflow-hidden">
+        <SideNavBar />
+        <main className="flex-1 overflow-auto">
+          <Outlet />
+        </main>
+      </div>
+      {/* <Footer /> */}
     </div>
   );
 };

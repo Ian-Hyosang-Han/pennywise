@@ -77,7 +77,7 @@ const ExpenseGraph = ({ selectedMonth }: { selectedMonth: number }) => {
 
   return (
     <div className="flex justify-center items-center mt-5">
-      <div className="w-[80%] p-4 bg-gray-100 rounded-lg">
+      <div className="card w-full">
         {sortedData.map(([item, amount], index) => {
           const color = COLORS[index % COLORS.length];
           const Icon = icons[item as keyof typeof icons] || icons["Others"];
