@@ -34,11 +34,12 @@ const TotalExpense = ({ selectedMonth }: TotalExpenseProps) => {
   );
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-5 mb-5">
       <section className="card w-full bg-gray-100 mt-5 p-5 rounded-lg">
+        
         {/* Monthly */}
         <div className="flex justify-between items-center font-Mon text-xl font-bold text-[#434343]">
-          <span>Total expenses for {selectedMonthName}:</span>
+          <span>Total expenses for {selectedMonthName.toUpperCase()}:</span>
           <span>
             {totalMonthlyExpense.toLocaleString("en-CA", {
               style: "currency",

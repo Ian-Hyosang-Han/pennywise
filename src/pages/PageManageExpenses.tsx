@@ -7,10 +7,7 @@ const PageManageExpenses: React.FC = () => {
   const deleteExpenseMutation = useDeleteExpense();
 
   const handleDelete = (id: string) => {
-    const confirmed = window.confirm("Are you sure you want to delete this expense?");
-    if (confirmed) {
-      deleteExpenseMutation.mutate(id);
-    }
+    deleteExpenseMutation.mutate(id);
   };
 
   if (isLoading) {

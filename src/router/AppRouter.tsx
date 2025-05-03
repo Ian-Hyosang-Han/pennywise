@@ -15,6 +15,7 @@ import { setUserInfo } from "../app/user/userSlice";
 import PageDashboard from "../pages/PageDashboard";
 import PageManageExpenses from "../pages/PageManageExpenses";
 import PageCreateExpenses from "../pages/PageCreateExpenses";
+import PageDetailExpense from "../pages/PageDetatilExpense";
 
 function AppRouter() {
   const dispatch = useDispatch<AppDispatch>();
@@ -55,6 +56,7 @@ function AppRouter() {
         {/* Dashboard Layout */}
         <Route element={isAuthenticated ? (<ContentLayout />) : (<Navigate to="/login" replace />)}>
           <Route path="/" element={<PageDashboard />} />
+          <Route path="detailexpense/:id" element={<PageDetailExpense />} />
           <Route path="manageexpenses" element={<PageManageExpenses />} />
           <Route path="createexpenses" element={<PageCreateExpenses />} />
         </Route>

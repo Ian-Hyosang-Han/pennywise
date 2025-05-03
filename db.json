@@ -8,20 +8,62 @@
   ],
   "expenses": [
     {
-      "id": "10d0e968-94b6-46aa-b2e3-b8f62a8e9f76",
       "date": "2025-04-22",
+      "title": "테스트111",
       "item": "Books",
-      "amount": 300,
+      "amount": 200,
       "description": "gift",
+      "createdBy": "hhan330",
+      "userId": "d9da",
+      "id": "10d0e968-94b6-46aa-b2e3-b8f62a8e9f76"
+    },
+    {
+      "id": "ae1d9c5b-b298-4eff-b390-2cfdd94da34f",
+      "date": "2025-05-02",
+      "title": "Gift",
+      "item": "Shopping",
+      "amount": 255,
+      "description": "gift for my friend",
       "createdBy": "hhan330",
       "userId": "d9da"
     },
     {
-      "id": "d7a9aa27-ce40-4d1c-9f48-6a204eeef0a3",
-      "date": "2025-04-16",
-      "item": "Shopping",
-      "amount": 550,
-      "description": "clothings",
+      "id": "d75565bc-3c45-4545-b58c-43aeec2ca960",
+      "date": "2025-05-01",
+      "title": "테스트 1",
+      "item": "Fitness",
+      "amount": 300,
+      "description": "테스트",
+      "createdBy": "hhan330",
+      "userId": "d9da"
+    },
+    {
+      "id": "bf610bb5-7063-4266-891d-ce7ed4ebd2fc",
+      "date": "2025-05-02",
+      "title": "테스트2",
+      "item": "Health",
+      "amount": 200,
+      "description": "테스트",
+      "createdBy": "hhan330",
+      "userId": "d9da"
+    },
+    {
+      "id": "e6e6a494-74d2-4ab3-8d4c-d1c64727f01b",
+      "date": "2025-05-03",
+      "title": "태스트3",
+      "item": "Essentials",
+      "amount": 100,
+      "description": "테스트",
+      "createdBy": "hhan330",
+      "userId": "d9da"
+    },
+    {
+      "id": "4ba59b47-26c6-498d-8c63-0f97620ab487",
+      "date": "2025-05-02",
+      "title": "테스트5",
+      "item": "Medical",
+      "amount": 500,
+      "description": "테스트",
       "createdBy": "hhan330",
       "userId": "d9da"
     }

@@ -1,8 +1,10 @@
-import { useRef } from "react";
+import React, { useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Expense } from "../types/expense";
 
 interface ExpenseFormProps {
+  initialData?: Expense;
+  submitLabel?: string;
   onExpenseData: (expense: Expense) => void;
 }
 
@@ -24,7 +26,11 @@ const categoryOptions = [
   "Others",
 ];
 
-const ExpenseForm = ({ onExpenseData }: ExpenseFormProps) => {
+const ExpenseForm: React.FC<ExpenseFormProps> = ({
+  initialData,
+  submitLabel = "Save",
+  onExpenseData,
+}) => {
   const dateRef = useRef<HTMLInputElement>(null);
   const titleRef = useRef<HTMLInputElement>(null);
   const itemRef = useRef<HTMLSelectElement>(null);
@@ -35,7 +41,7 @@ const ExpenseForm = ({ onExpenseData }: ExpenseFormProps) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const id = uuidv4();
+    const id = initialData?.id || uuidv4();
     const date = dateRef.current?.value;
     const title = titleRef.current?.value;
     const item = itemRef.current?.value;
@@ -67,49 +73,52 @@ const ExpenseForm = ({ onExpenseData }: ExpenseFormProps) => {
   };
 
   return (
-    <div className="mt-5 ml-5 mr-5">
-      <section className="card w-full">
-        <h2 className="font-Mon text-3xl font-bold mb-4">Create Expense</h2>
+    <div className="mt-5 mx-5">
+      <section className="card w-full bg-gray-100 rounded-lg">
 
-        <form className="flex flex-col" onSubmit={handleSubmit}>
-          {/* Title */}
-          <fieldset className="flex flex-col min-w-[180px]">
-            <label className="font-Raj mb-2 text-2xl font-bold" htmlFor="title">
+        <h2 className="font-Han text-[#434343] uppercase text-3xl font-bold mb-4">
+          {initialData ? "Edit Expense" : "Create Expense"}
+        </h2>
+
+        <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
+          <fieldset className="flex flex-col">
+            <label htmlFor="title" className="font-Raj text-2xl font-bold mb-2">
               Expense Title
             </label>
             <input
-              ref={titleRef}
               id="title"
               type="text"
+              defaultValue={initialData?.title}
+              ref={titleRef}
               placeholder="Title"
-              className="form-input"
+              className="form-input w-full p-2 border rounded"
             />
           </fieldset>
 
-          <div className="flex flex-row gap-5 mt-10">
-            {/* Day */}
-            <fieldset className="flex flex-col w-full">
-              <label className="font-Mon mb-2 font-bold" htmlFor="date">
+          {/* Date & Category */}
+          <div className="flex gap-6">
+            <fieldset className="flex flex-col w-1/2">
+              <label htmlFor="date" className="font-Mon font-bold mb-2">
                 Date
               </label>
               <input
-                ref={dateRef}
                 id="date"
                 type="date"
-                className="form-input"
+                defaultValue={initialData?.date}
+                ref={dateRef}
+                className="form-input p-2 border rounded"
               />
             </fieldset>
 
-            {/* Category */}
-            <fieldset className="flex flex-col w-full">
-              <label className="font-Mon mb-2 font-bold" htmlFor="item">
+            <fieldset className="flex flex-col w-1/2">
+              <label htmlFor="item" className="font-Mon font-bold mb-2">
                 Category
               </label>
               <select
-                ref={itemRef}
                 id="item"
-                defaultValue=""
-                className="form-input"
+                defaultValue={initialData?.item || ""}
+                ref={itemRef}
+                className="form-input p-2 border rounded"
               >
                 <option value="" disabled>
                   Select category
@@ -123,42 +132,42 @@ const ExpenseForm = ({ onExpenseData }: ExpenseFormProps) => {
             </fieldset>
           </div>
 
-          <div className="flex flex-row gap-5 mt-10">
-            {/* Amount */}
-            <fieldset className="flex flex-col w-full">
-              <label className="font-Mon mb-2 font-bold" htmlFor="amount">
-                Amount
-              </label>
-              <input
-                ref={amountRef}
-                id="amount"
-                type="number"
-                placeholder="Expense amount"
-                className="form-input"
-              />
-            </fieldset>
-          </div>
-
-          {/* Description */}
-          <fieldset className="flex flex-col w-full mt-10">
-            <label className="font-Mon mb-2 font-bold" htmlFor="description">
-              Description
+          {/* Amount */}
+          <fieldset className="flex flex-col">
+            <label htmlFor="amount" className="font-Mon font-bold mb-2">
+              Amount
             </label>
-            <textarea
-              ref={descriptionRef}
-              id="description"
-              placeholder="Details of the expense"
-              className="form-input h-[90px]"
+            <input
+              id="amount"
+              type="number"
+              defaultValue={initialData?.amount}
+              ref={amountRef}
+              placeholder="Expense amount"
+              className="form-input p-2 border rounded w-full"
             />
           </fieldset>
 
-          {/* Save button */}
-          <div className="w-full flex justify-end">
+          {/* Description */}
+          <fieldset className="flex flex-col">
+            <label htmlFor="description" className="font-Mon font-bold mb-2">
+              Description
+            </label>
+            <textarea
+              id="description"
+              defaultValue={initialData?.description}
+              ref={descriptionRef}
+              placeholder="Details of the expense"
+              className="form-input p-2 border rounded h-24"
+            />
+          </fieldset>
+
+          {/* Submit */}
+          <div className="flex justify-end">
             <button
               type="submit"
-              className="font-btn font-bold w-[120px] tracking-[5px] mt-7.5 h-9 text-xl text-white bg-[#6BC1B4] hover:bg-[#5CAEA2] transition-colors duration-200 rounded-md"
+              className="font-btn font-bold bg-[#6BC1B4] hover:bg-[#5CAEA2] text-white px-6 py-2 rounded transition"
             >
-              SAVE
+              {submitLabel}
             </button>
           </div>
         </form>

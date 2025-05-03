@@ -39,14 +39,14 @@ const PageSignup = () => {
     }
 
     try {
-      // 이미 존재하는 사용자 확인
+      // Verify if the user already exists
       const check = await api.get(`/users?username=${username}`);
       if (check.data.length > 0) {
         setError("Username already exists.");
         return;
       }
 
-      // 회원가입 요청 (json-server용)
+      // Send signup request to json-server
       const res = await api.post("/users", {
         username: username.trim(),
         password: password.trim(),
@@ -55,7 +55,7 @@ const PageSignup = () => {
       const user = res.data;
       const mockToken = "mock-token";
 
-      // 저장
+      // Save
       localStorage.setItem("accessToken", mockToken);
       localStorage.setItem("user", JSON.stringify(user));
 
@@ -116,7 +116,7 @@ const PageSignup = () => {
           />
         </div>
 
-        {/* ✅ Confirmpassword */}
+        {/* Confirmpassword */}
         <div className="mb-4">
           <label
             className="font-Raj text-[#434343] text-2xl font-medium"

@@ -9,7 +9,7 @@ const ConfirmModal = ({ isOpen, onConfirm, onCancel, message }: ConfirmModalProp
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+    <div className="fixed inset-0 bg-black/30 flex justify-center items-center z-50">
       <div className="bg-[#fffff0] p-8 rounded-lg shadow-lg text-center">
         <p className="text-xl font-bold mb-6 text-[#434343]">{message || "Are you sure?"}</p>
         <div className="flex justify-center gap-6">

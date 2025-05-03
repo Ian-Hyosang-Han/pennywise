@@ -6,20 +6,10 @@ import { useExpenses } from "../app/useexpenses/useExpenses";
 import { Expense } from "../types/expense";
 
 const COLORS = [
-  "#93CDE9",
-  "#1BC9A6",
-  "#5D6DBE",
-  "#F15B87",
-  "#F56971",
-  "#E4CB6D",
-  "#fc8969",
-  "#E8738F",
-  "#FF4560",
-  "#A4DDED",
-  "#FFB347",
-  "#B39EB5",
-  "#fa635b",
-  "#ffd1dc",
+  "#93CDE9", "#1BC9A6", "#5D6DBE", "#F15B87",
+  "#F56971", "#E4CB6D", "#fc8969", "#E8738F",
+  "#FF4560", "#A4DDED", "#FFB347", "#B39EB5",
+  "#fa635b", "#ffd1dc",
 ];
 
 const ExpenseGraph = ({ selectedMonth }: { selectedMonth: number }) => {
@@ -27,26 +17,17 @@ const ExpenseGraph = ({ selectedMonth }: { selectedMonth: number }) => {
   const [animationReady, setAnimationReady] = useState(false);
 
   const filteredExpenses = expenses.filter((e: Expense) => {
-    const [year, month] = e.date.split('-').map(Number);
+    const [, month] = e.date.split('-').map(Number);
     return month === selectedMonth;
   });
 
-  const categorySum: Record<string, number> = filteredExpenses.reduce(
-    (acc: Record<string, number>, curr: Expense) => {
-      if (!acc[curr.item]) acc[curr.item] = 0;
-      acc[curr.item] += Number(curr.amount);
-      return acc;
-    },
-    {}
-  );
+  const categorySum = filteredExpenses.reduce<Record<string, number>>((acc, curr) => {
+    acc[curr.item] = (acc[curr.item] || 0) + curr.amount;
+    return acc;
+  }, {});
 
-  const sortedData: [string, number][] = Object.entries(categorySum).sort(
-    ([, a], [, b]) => b - a
-  );
-  const totalAmount = sortedData.reduce(
-    (acc: number, [, amt]) => acc + Number(amt),
-    0
-  );
+  const sortedData = Object.entries(categorySum).sort(([, a], [, b]) => b - a);
+  const totalAmount = sortedData.reduce((sum, [, amt]) => sum + amt, 0);
 
   useEffect(() => {
     setAnimationReady(false);
@@ -81,9 +62,7 @@ const ExpenseGraph = ({ selectedMonth }: { selectedMonth: number }) => {
         {sortedData.map(([item, amount], index) => {
           const color = COLORS[index % COLORS.length];
           const Icon = icons[item as keyof typeof icons] || icons["Others"];
-          const widthPercent = animationReady
-            ? (amount / totalAmount) * 100
-            : 0;
+          const widthPercent = animationReady ? (amount / totalAmount) * 100 : 0;
 
           return (
             <div className="flex items-center justify-between mb-4" key={item}>
@@ -107,20 +86,10 @@ const ExpenseGraph = ({ selectedMonth }: { selectedMonth: number }) => {
                   style: "currency",
                   currency: "CAD",
                 })}
-              </p>{" "}
+              </p>
             </div>
           );
         })}
-
-        <div className="flex justify-end mt-4 pr-2">
-          <p className="text-right text-lg font-semibold text-[#434343]">
-            Total:{" "}
-            {totalAmount.toLocaleString("en-CA", {
-              style: "currency",
-              currency: "CAD",
-            })}
-          </p>
-        </div>
       </div>
     </div>
   );
