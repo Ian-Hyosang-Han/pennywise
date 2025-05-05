@@ -1,14 +1,7 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-interface Expense {
-  id: string;
-  date: string;
-  item: string;
-  amount: number;
-  description: string;
-  createdBy: string;
-  userId: string;
-}
+import ConfirmModal from "./ConfirmModal";
+import { Expense } from "../types/expense";
 
 interface ExpenseHistoryProps {
   expenseData: Expense[];
@@ -17,59 +10,99 @@ interface ExpenseHistoryProps {
 
 const ExpenseHistory = ({ expenseData, onDelete }: ExpenseHistoryProps) => {
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
 
-  const handleDetail = (id: string) => {
-    navigate(`/detail/${id}`);
+  // Navigate to the detail page when 'Edit' is clicked
+  const handleEditClick = (id: string) => {
+    navigate(`/detailexpense/${id}`);
   };
 
-  const handleDelete = (id: string) => {
-    const confirmed = window.confirm("Are you sure you want to delete this expense?");
-    if (confirmed) {
-      onDelete(id);
+  // Open modal on 'Delete' click
+  const handleDeleteClick = (id: string) => {
+    setSelectedId(id);
+    setIsModalOpen(true);
+  };
+
+  // Clicking 'Confirm' in the modal triggers the actual delete action
+  const handleConfirmDelete = () => {
+    if (selectedId) {
+      onDelete(selectedId);
+      setSelectedId(null);
     }
+    setIsModalOpen(false);
+  };
+
+  // On 'Cancel' click → close the modal
+  const handleCancelDelete = () => {
+    setSelectedId(null);
+    setIsModalOpen(false);
   };
 
   return (
-    <section className="w-[80%] mx-auto p-5 bg-gray-100 rounded-lg mb-8">
-      {expenseData.length === 0 ? (
-        <p className="text-center text-gray-500">No expense records available.</p>
-      ) : (
-        <ul className="w-full mt-2">
-          {expenseData.map((expense) => (
-            <li
-              key={expense.id}
-              className="flex justify-between items-center p-4 bg-white shadow-md mb-2 rounded"
-            >
-              <div
-                className="w-4/5 overflow-hidden cursor-pointer"
-                onClick={() => handleDetail(expense.id)}
+    <div className="mt-5 mb-5 mx-5">
+      <section className="card w-full">
+        <h2 className="font-Han text-[#434343] uppercase text-3xl font-bold mb-4">Manage Expenses</h2>
+
+        {expenseData.length === 0 ? (
+          <p className="text-center text-gray-500">
+            No expense records available.
+          </p>
+        ) : (
+          <ul className="w-full space-y-2">
+            {expenseData.map((expense) => (
+              <li
+                key={expense.id}
+                className="flex justify-between items-start mb-5 p-4 bg-gray-50 shadow-md rounded"
               >
-                <span className="font-Mon text-xs text-gray-500 mr-2">
-                  {expense.date}
-                </span>
-                <span className="font-Mon text-xs text-gray-500">
-                  Created by: {expense.createdBy}
-                </span>
-                <p className="font-Raj font-bold mt-2 truncate">
-                  {`${expense.item} - ${expense.description}`}
-                </p>
-              </div>
-              <div className="flex flex-col items-end text-right">
-                <span className="font-Raj font-bold mb-2 text-xl text-[#434343] whitespace-nowrap">
-                  {`${expense.amount} CAD`}
-                </span>
-                <button
-                  onClick={() => handleDelete(expense.id)}
-                  className="font-btn font-bold bg-red-400 hover:bg-red-500 text-white px-2 py-1 rounded text-sm"
-                >
-                  Delete
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
-      )}
-    </section>
+                <div className="w-4/5">
+                  <h4 className="font-Mon text-lg mb-1">{expense.title}</h4>
+                  <div className="flex gap-2 text-xs text-gray-500 mb-1">
+                    <span>{expense.date}</span>
+                    <span>Created by: {expense.createdBy}</span>
+                  </div>
+                  <p className="font-Raj font-bold truncate">
+                    {`${expense.item} — ${expense.description}`}
+                  </p>
+                </div>
+
+                <div className="flex flex-col items-end space-y-2">
+                  <span className="font-Raj font-bold text-xl text-[#434343]">
+                    {expense.amount.toLocaleString("en-CA", {
+                      style: "currency",
+                      currency: "CAD",
+                    })}
+                  </span>
+
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => handleEditClick(expense.id)}
+                      className="font-btn font-bold bg-blue-400 hover:bg-blue-500 text-white px-2 py-1 rounded text-sm"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => handleDeleteClick(expense.id)}
+                      className="font-btn font-bold bg-red-400 hover:bg-red-500 text-white px-2 py-1 rounded text-sm"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {/* Delete Confirmation Modal */}
+        <ConfirmModal
+          isOpen={isModalOpen}
+          onConfirm={handleConfirmDelete}
+          onCancel={handleCancelDelete}
+          message="Are you sure you want to delete this expense?"
+        />
+      </section>
+    </div>
   );
 };
 

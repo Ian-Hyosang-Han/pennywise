@@ -1,21 +1,26 @@
 import api from './axios';
+import { Expense } from '../types/expense';
 
-export const fetchExpenses = async () => {
-    const response = await api.get('/expenses?_sort=date&_order=desc');
-    return response.data;
+// Fetch all expenses
+export const fetchExpenses = async (): Promise<Expense[]> => {
+  const response = await api.get<Expense[]>('/expenses?_sort=date&_order=desc');
+  return response.data;
 };
 
-export const addExpense = async (expense) => {
-    const response = await api.post('/expenses', expense);
-    return response.data;
+// Add a new expense
+export const addExpense = async (expense: Expense): Promise<Expense> => {
+  const response = await api.post<Expense>('/expenses', expense);
+  return response.data;
 };
 
-export const updateExpense = async ({ id, ...updatedExpense }) => {
-    const response = await api.put(`/expenses/${id}`, updatedExpense);
-    return response.data;
+// Update an existing expense
+export const updateExpense = async (expense: Expense): Promise<Expense> => {
+  const { id, ...updatedFields } = expense;
+  const response = await api.put<Expense>(`/expenses/${id}`, updatedFields);
+  return response.data;
 };
 
-export const deleteExpense = async (id) => {
-    const response = await api.delete(`/expenses/${id}`);
-    return response.data;
+// Delete an expense
+export const deleteExpense = async (id: string): Promise<void> => {
+  await api.delete(`/expenses/${id}`);
 };

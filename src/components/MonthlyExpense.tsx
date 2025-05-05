@@ -24,7 +24,7 @@ const MonthlyExpense = ({
 
   return (
     <div className="flex justify-center items-center">
-      <section className="w-[80%] bg-gray-100 mt-5 p-5 rounded-lg">
+      <section className="card w-full">
         <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-4 justify-center">
           {monthArr.map((month, index) => {
             const monthIndex = index + 1;
@@ -35,7 +35,7 @@ const MonthlyExpense = ({
                 className={`font-Han uppercase tracking-wider text-center font-semibold text-base h-[60px] px-4 flex justify-center items-center rounded-lg cursor-pointer transition-colors duration-200 ${
                   selectedMonth === monthIndex
                     ? "bg-[#91cfec] text-white"
-                    : "bg-white hover:bg-[#e0e0e0] text-[#434343]"
+                    : "bg-gray-200 hover:bg-[#e0e0e0] text-[#434343]"
                 }`}
               >
                 {month}

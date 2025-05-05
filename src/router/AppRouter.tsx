@@ -8,46 +8,60 @@ import ContentLayout from "../layouts/ContentLayout";
 
 import PageLogin from "../pages/PageLogin";
 import PageSignup from "../pages/PageSignup";
-import PageHome from "../pages/PageHome";
 import PageNotFound from "../pages/PageNotFound";
 
 import { checkAuth } from "../app/auth/authSlice";
+import { setUserInfo } from "../app/user/userSlice";
+import PageDashboard from "../pages/PageDashboard";
+import PageManageExpenses from "../pages/PageManageExpenses";
+import PageCreateExpenses from "../pages/PageCreateExpenses";
+import PageDetailExpense from "../pages/PageDetatilExpense";
 
 function AppRouter() {
-
   const dispatch = useDispatch<AppDispatch>();
-  const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.auth.isAuthenticated
+  );
 
   useEffect(() => {
     dispatch(checkAuth())
       .unwrap()
       .catch((err) => console.error("auth check failed", err));
+
+    const savedUser = localStorage.getItem("user");
+    if (savedUser) {
+      dispatch(setUserInfo(JSON.parse(savedUser)));
+    }
   }, [dispatch]);
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/pennywise">
       <Routes>
-        {/* ✅ 로그인 이후 접근 가능한 레이아웃 */}
-        <Route element={<ContentLayout />}>
-          <Route
-            path="/"
-            element={isAuthenticated ? <PageHome /> : <Navigate to="/login" replace />}
-          />
-        </Route>
-
-        {/* ✅ 로그인/회원가입 레이아웃 */}
+        {/* Login / Signup Layout */}
         <Route element={<BasicLayout />}>
           <Route
-            path="/login"
-            element={isAuthenticated ? <Navigate to="/" replace /> : <PageLogin />}
+            path="login"
+            element={
+              isAuthenticated ? <Navigate to="/" replace /> : <PageLogin />
+            }
           />
           <Route
-            path="/signup"
-            element={isAuthenticated ? <Navigate to="/" replace /> : <PageSignup />}
+            path="signup"
+            element={
+              isAuthenticated ? <Navigate to="/" replace /> : <PageSignup />
+            }
           />
         </Route>
 
-        {/* ✅ 모든 경로 fallback */}
+        {/* Dashboard Layout */}
+        <Route element={isAuthenticated ? (<ContentLayout />) : (<Navigate to="/login" replace />)}>
+          <Route path="/" element={<PageDashboard />} />
+          <Route path="detailexpense/:id" element={<PageDetailExpense />} />
+          <Route path="manageexpenses" element={<PageManageExpenses />} />
+          <Route path="createexpenses" element={<PageCreateExpenses />} />
+        </Route>
+
+        {/* fallback 404 page */}
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>

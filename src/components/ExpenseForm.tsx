@@ -1,48 +1,57 @@
-import { useRef } from "react";
+import React, { useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
-
-interface Expense {
-  id: string;
-  date: string;
-  item: string;
-  amount: number;
-  description: string;
-  createdBy: string;
-  userId: string;
-}
+import { Expense } from "../types/expense";
 
 interface ExpenseFormProps {
+  initialData?: Expense;
+  submitLabel?: string;
   onExpenseData: (expense: Expense) => void;
 }
 
-// 카테고리 목록 (icons 객체 키 기준)
 const categoryOptions = [
-  "Beauty", "Books", "Shopping", "Food", "Snacks",
-  "Travel", "Education", "Fitness", "Events", "Health",
-  "Medical", "Entertainment", "Essentials", "Transportation", "Others"
+  "Beauty",
+  "Books",
+  "Shopping",
+  "Food",
+  "Snacks",
+  "Travel",
+  "Education",
+  "Fitness",
+  "Events",
+  "Health",
+  "Medical",
+  "Entertainment",
+  "Essentials",
+  "Transportation",
+  "Others",
 ];
 
-const ExpenseForm = ({ onExpenseData }: ExpenseFormProps) => {
+const ExpenseForm: React.FC<ExpenseFormProps> = ({
+  initialData,
+  submitLabel = "Save",
+  onExpenseData,
+}) => {
   const dateRef = useRef<HTMLInputElement>(null);
+  const titleRef = useRef<HTMLInputElement>(null);
   const itemRef = useRef<HTMLSelectElement>(null);
   const amountRef = useRef<HTMLInputElement>(null);
-  const descriptionRef = useRef<HTMLInputElement>(null);
+  const descriptionRef = useRef<HTMLTextAreaElement>(null);
   const user = JSON.parse(localStorage.getItem("user") || "{}");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const id = uuidv4();
+    const id = initialData?.id || uuidv4();
     const date = dateRef.current?.value;
+    const title = titleRef.current?.value;
     const item = itemRef.current?.value;
     const amount = amountRef.current?.value;
     const description = descriptionRef.current?.value;
 
-    if (!date || !item || !amount || !description) {
+    if (!date || !title || !item || !amount || !description) {
       alert("Please fill in all fields.");
       return;
     }
-
     if (Number(amount) <= 0) {
       alert("Amount must be greater than zero.");
       return;
@@ -51,6 +60,7 @@ const ExpenseForm = ({ onExpenseData }: ExpenseFormProps) => {
     const expenseData: Expense = {
       id,
       date,
+      title,
       item,
       amount: Number(amount),
       description,
@@ -63,77 +73,106 @@ const ExpenseForm = ({ onExpenseData }: ExpenseFormProps) => {
   };
 
   return (
-    <section className="w-full max-w-[80%] mx-auto p-5 bg-gray-100 rounded-lg mt-5 mb-5">
-      <form
-        className="flex flex-wrap gap-4 items-center justify-center"
-        onSubmit={handleSubmit}
-      >
-        <fieldset className="flex flex-col min-w-[180px]">
-          <label className="font-Mon mb-2 font-bold" htmlFor="date">
-            Date
-          </label>
-          <input
-            className="w-[180px] p-1 border-2 rounded-md border-[#757575] bg-white"
-            type="date"
-            id="date"
-            placeholder="YYYY-MM-DD"
-            ref={dateRef}
-          />
-        </fieldset>
+    <div className="mt-5 mx-5">
+      <section className="card w-full bg-gray-100 rounded-lg">
 
-        <fieldset className="flex flex-col min-w-[180px]">
-          <label className="font-Mon mb-2 font-bold" htmlFor="item">
-            Category
-          </label>
-          <select
-            className="w-[180px] p-1 border-2 rounded-md border-[#757575] bg-white"
-            id="item"
-            ref={itemRef}
-            defaultValue=""
-          >
-            <option value="" disabled>Select category</option>
-            {categoryOptions.map((cat) => (
-              <option key={cat} value={cat}>
-                {cat}
-              </option>
-            ))}
-          </select>
-        </fieldset>
+        <h2 className="font-Han text-[#434343] uppercase text-3xl font-bold mb-4">
+          {initialData ? "Edit Expense" : "Create Expense"}
+        </h2>
 
-        <fieldset className="flex flex-col min-w-[150px]">
-          <label className="font-Mon mb-2 font-bold" htmlFor="amount">
-            Amount
-          </label>
-          <input
-            className="w-[180px] p-1 border-2 rounded-md border-[#757575] bg-white"
-            type="number"
-            id="amount"
-            placeholder="Expense amount"
-            ref={amountRef}
-          />
-        </fieldset>
+        <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
+          <fieldset className="flex flex-col">
+            <label htmlFor="title" className="font-Raj text-2xl font-bold mb-2">
+              Expense Title
+            </label>
+            <input
+              id="title"
+              type="text"
+              defaultValue={initialData?.title}
+              ref={titleRef}
+              placeholder="Title"
+              className="form-input w-full p-2 border rounded"
+            />
+          </fieldset>
 
-        <fieldset className="flex flex-col min-w-[150px]">
-          <label className="font-Mon mb-2 font-bold" htmlFor="description">
-            Description
-          </label>
-          <input
-            className="w-[180px] p-1 border-2 rounded-md border-[#757575] bg-white"
-            type="text"
-            id="description"
-            placeholder="Details of the expense"
-            ref={descriptionRef}
-          />
-        </fieldset>
+          {/* Date & Category */}
+          <div className="flex gap-6">
+            <fieldset className="flex flex-col w-1/2">
+              <label htmlFor="date" className="font-Mon font-bold mb-2">
+                Date
+              </label>
+              <input
+                id="date"
+                type="date"
+                defaultValue={initialData?.date}
+                ref={dateRef}
+                className="form-input p-2 border rounded"
+              />
+            </fieldset>
 
-        <button
-          className="font-btn font-bold w-[120px] tracking-[5px] mt-7.5 h-9 text-xl text-white px-1 py-1 bg-[#6BC1B4] hover:bg-[#5CAEA2] transition-colors duration-200 block rounded-md cursor-pointer"
-          type="submit"
-        >
-          SAVE
-        </button>
-      </form>
-    </section>
+            <fieldset className="flex flex-col w-1/2">
+              <label htmlFor="item" className="font-Mon font-bold mb-2">
+                Category
+              </label>
+              <select
+                id="item"
+                defaultValue={initialData?.item || ""}
+                ref={itemRef}
+                className="form-input p-2 border rounded"
+              >
+                <option value="" disabled>
+                  Select category
+                </option>
+                {categoryOptions.map((cat) => (
+                  <option key={cat} value={cat}>
+                    {cat}
+                  </option>
+                ))}
+              </select>
+            </fieldset>
+          </div>
+
+          {/* Amount */}
+          <fieldset className="flex flex-col">
+            <label htmlFor="amount" className="font-Mon font-bold mb-2">
+              Amount
+            </label>
+            <input
+              id="amount"
+              type="number"
+              defaultValue={initialData?.amount}
+              ref={amountRef}
+              placeholder="Expense amount"
+              className="form-input p-2 border rounded w-full"
+            />
+          </fieldset>
+
+          {/* Description */}
+          <fieldset className="flex flex-col">
+            <label htmlFor="description" className="font-Mon font-bold mb-2">
+              Description
+            </label>
+            <textarea
+              id="description"
+              defaultValue={initialData?.description}
+              ref={descriptionRef}
+              placeholder="Details of the expense"
+              className="form-input p-2 border rounded h-24"
+            />
+          </fieldset>
+
+          {/* Submit */}
+          <div className="flex justify-end">
+            <button
+              type="submit"
+              className="font-btn font-bold bg-[#6BC1B4] hover:bg-[#5CAEA2] text-white px-6 py-2 rounded transition"
+            >
+              {submitLabel}
+            </button>
+          </div>
+        </form>
+      </section>
+    </div>
   );
 };
 
