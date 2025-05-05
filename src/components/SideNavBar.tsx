@@ -60,7 +60,7 @@ const SideNavBar: React.FC<SideNavBarProps> = ({ isOpen }) => {
       </ul>
       <button
         onClick={handleLogout}
-        className="flex items-center gap-2 font-Mon font-medium px-4 py-2 rounded rounded-tr-none rounded-br-none hover:bg-[#6BC1B4] hover:!text-white transition-colors duration-200 ml-3 mb-10"
+        className="flex items-center gap-2 font-Mon font-medium px-4 py-2 rounded rounded-tr-none rounded-br-none hover:bg-[#6BC1B4] hover:!text-white transition-colors duration-200 ml-3 mb-10 cursor-pointer"
       >
         <LuLogOut size={20} />
         <span>Logout</span>

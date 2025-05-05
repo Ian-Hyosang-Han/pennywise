@@ -165,7 +165,7 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({
           <div className="flex justify-end">
             <button
               type="submit"
-              className="font-btn font-bold bg-[#6BC1B4] hover:bg-[#5CAEA2] text-white px-6 py-2 rounded transition"
+              className="font-btn font-bold cursor-pointer bg-[#6BC1B4] hover:bg-[#5CAEA2] text-white px-6 py-2 rounded transition"
             >
               {submitLabel}
             </button>
