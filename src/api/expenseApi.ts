@@ -13,7 +13,7 @@ export const addExpense = async (expense: Expense): Promise<Expense> => {
   return response.data;
 };
 
-// Update an existing expense
+// Update an existing expense: accept the full Expense object
 export const updateExpense = async (expense: Expense): Promise<Expense> => {
   const { id, ...updatedFields } = expense;
   const response = await api.put<Expense>(`/expenses/${id}`, updatedFields);
