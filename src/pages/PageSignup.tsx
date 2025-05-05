@@ -21,6 +21,7 @@ const PageSignup = () => {
   const navigate = useNavigate();
 
   const handleRegister = async () => {
+    console.log({ username, password, confirmPassword });
     if (!username.trim()) {
       setError("Please fill your Username.");
       return;
@@ -155,7 +156,7 @@ const PageSignup = () => {
         {error && <p className="text-red-600 mb-4 text-center">{error}</p>}
 
         <button
-          className="font-btn font-bold w-[380px] text-3xl text-white px-2 py-2 bg-[#6BC1B4] hover:bg-[#5CAEA2] transition-colors duration-200 rounded-md"
+          className="font-btn font-bold w-[380px] text-3xl text-white px-2 py-2 cursor-pointer bg-[#6BC1B4] hover:bg-[#5CAEA2] transition-colors duration-200 rounded-md"
           onClick={handleRegister}
         >
           Sign Up

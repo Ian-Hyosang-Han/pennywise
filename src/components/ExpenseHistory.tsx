@@ -77,13 +77,13 @@ const ExpenseHistory = ({ expenseData, onDelete }: ExpenseHistoryProps) => {
                   <div className="flex gap-2">
                     <button
                       onClick={() => handleEditClick(expense.id)}
-                      className="font-btn font-bold bg-blue-400 hover:bg-blue-500 text-white px-2 py-1 rounded text-sm"
+                      className="font-btn font-bold cursor-pointer bg-blue-400 hover:bg-blue-500 text-white px-2 py-1 rounded text-sm"
                     >
                       Edit
                     </button>
                     <button
                       onClick={() => handleDeleteClick(expense.id)}
-                      className="font-btn font-bold bg-red-400 hover:bg-red-500 text-white px-2 py-1 rounded text-sm"
+                      className="font-btn font-bold cursor-pointer bg-red-400 hover:bg-red-500 text-white px-2 py-1 rounded text-sm"
                     >
                       Delete
                     </button>
