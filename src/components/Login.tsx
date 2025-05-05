@@ -70,7 +70,7 @@ const Login = () => {
   return (
     <div className="w-full min-h-screen flex flex-col justify-center items-center">
       <h1 className="flex flex-low justify-center items-center">
-        <img src="/logo.png" className="w-24" alt="logo" />
+        <img src="/pennywise-logo.png" className="w-24" alt="logo" />
         <span className="font-Mon text-[50px] font-bold">{appTitle}</span>
       </h1>
       <p className="font-Raj text-xl text-[#434343] mb-2">Please enter your details to log in</p>

@@ -35,7 +35,7 @@ function AppRouter() {
   }, [dispatch]);
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/pennywise">
       <Routes>
         {/* Login / Signup Layout */}
         <Route element={<BasicLayout />}>
