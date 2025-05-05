@@ -31,7 +31,7 @@ const Login = () => {
     }
 
     try {
-      // json-server 방식: username + password 검색
+      // json-server: search username + password
       const response = await api.get(
         `/users?username=${trimmedUsername}&password=${password}`
       );
