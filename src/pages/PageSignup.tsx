@@ -77,9 +77,9 @@ const PageSignup = () => {
       <section>
         <h1 className="flex items-center justify-center mb-2">
           <img src="/pennywise-logo.png" className="w-24" alt="logo" />
-          <span className="font-Mon text-[50px] font-bold">{appTitle}</span>
+          <span className="font-Mon text-[45px] font-bold">{appTitle}</span>
         </h1>
-        <p className="font-Mon text-2xl text-[#434343] font-bold mb-4">
+        <p className="font-Mon text-2xl text-[#434343] font-bold">
           Create an Account
         </p>
 
@@ -104,7 +104,7 @@ const PageSignup = () => {
         {/* Password */}
         <div className="relative mb-4">
           <label
-            className="font-Raj text-[#434343] text-2xl font-medium block mb-2"
+            className="font-Raj text-[#434343] text-2xl font-medium block"
             htmlFor="password"
           >
             Password:
@@ -128,7 +128,7 @@ const PageSignup = () => {
         {/* Confirm Password */}
         <div className="relative mb-6">
           <label
-            className="font-Raj text-[#434343] text-2xl font-medium block mb-2"
+            className="font-Raj text-[#434343] text-2xl font-medium block"
             htmlFor="confirmPassword"
           >
             Confirm Password:
@@ -159,7 +159,7 @@ const PageSignup = () => {
           className="font-btn font-bold w-[380px] text-3xl text-white px-2 py-2 cursor-pointer bg-[#6BC1B4] hover:bg-[#5CAEA2] transition-colors duration-200 rounded-md"
           onClick={handleRegister}
         >
-          Sign Up
+          SignUp
         </button>
 
         <p className="font-Raj text-[#434343] text-2xl mt-4">

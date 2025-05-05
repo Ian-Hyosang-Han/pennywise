@@ -112,7 +112,7 @@ const Login = () => {
         className="font-btn font-bold ml-5 mb-5 w-[380px] text-3xl text-white px-2 py-2 bg-[#6BC1B4] hover:bg-[#5CAEA2] transition-colors duration-200 block rounded-md cursor-pointer"
         onClick={handleLogIn}
       >
-        Log In
+        LogIn
       </button>
 
       <p className="font-Raj text-[#434343] text-2xl">
