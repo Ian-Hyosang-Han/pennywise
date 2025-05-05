@@ -24,9 +24,12 @@ function AppRouter() {
   );
 
   useEffect(() => {
-    dispatch(checkAuth())
-      .unwrap()
-      .catch((err) => console.error("auth check failed", err));
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      dispatch(checkAuth())
+        .unwrap()
+        .catch((err) => console.error("auth check failed", err));
+    }
 
     const savedUser = localStorage.getItem("user");
     if (savedUser) {
