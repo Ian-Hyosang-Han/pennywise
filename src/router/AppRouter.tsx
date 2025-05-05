@@ -35,7 +35,7 @@ function AppRouter() {
   }, [dispatch]);
 
   return (
-    <BrowserRouter basename={import.meta.env.BASE_URL}>
+    <BrowserRouter>
       <Routes>
         {/* Login / Signup Layout */}
         <Route element={<BasicLayout />}>
