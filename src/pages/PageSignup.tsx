@@ -1,27 +1,28 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../app/store";
-import { login } from "../app/auth/authSlice";
-import { setUserInfo } from "../app/user/userSlice";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { api } from "../api/axios";
 import { isAxiosError } from "axios";
 import { appTitle } from "../globals/globalVariables";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
+import SuccessModal from "../components/SuccessModal";
 
-const PageSignup = () => {
+const PageSignup: React.FC = () => {
+  // Form state
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
+  const [showSuccess, setShowSuccess] = useState<boolean>(false);
 
-  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
+  // Handle registration logic
   const handleRegister = async () => {
-    console.log({ username, password, confirmPassword });
+    setError("");
+
+    // Validation checks
     if (!username.trim()) {
       setError("Please fill your Username.");
       return;
@@ -40,29 +41,27 @@ const PageSignup = () => {
     }
 
     try {
-      // Verify if the user already exists
+      // Check if user already exists
       const check = await api.get(`/users?username=${username}`);
       if (check.data.length > 0) {
         setError("Username already exists.");
         return;
       }
 
-      // Send signup request to json-server
+      // Send signup request
       const res = await api.post("/users", {
         username: username.trim(),
         password: password.trim(),
       });
 
+      // Save token and user to localStorage
       const user = res.data;
       const mockToken = "mock-token";
-
-      // Save
       localStorage.setItem("accessToken", mockToken);
       localStorage.setItem("user", JSON.stringify(user));
 
-      dispatch(setUserInfo(user));
-      dispatch(login());
-      navigate("/");
+      // Show success modal
+      setShowSuccess(true);
     } catch (err: unknown) {
       if (isAxiosError(err)) {
         setError(err.response?.data?.message || "Registration failed.");
@@ -153,8 +152,10 @@ const PageSignup = () => {
           </div>
         </div>
 
+        {/* Error message */}
         {error && <p className="text-red-600 mb-4 text-center">{error}</p>}
 
+        {/* SignUp button */}
         <button
           className="font-btn font-bold w-[380px] text-3xl text-white px-2 py-2 cursor-pointer bg-[#6BC1B4] hover:bg-[#5CAEA2] transition-colors duration-200 rounded-md"
           onClick={handleRegister}
@@ -169,6 +170,15 @@ const PageSignup = () => {
           </Link>
         </p>
       </section>
+
+      {/* Success Modal */}
+      <SuccessModal
+        isOpen={showSuccess}
+        onClose={() => {
+          setShowSuccess(false);
+          navigate("/login");
+        }}
+      />
     </main>
   );
 };
