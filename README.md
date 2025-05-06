@@ -18,15 +18,15 @@ Frontend <br/>
 <img alt="React" src="https://img.shields.io/badge/-React-45b8d8?style=flat-square&logo=react&logoColor=white" />
 <img alt="TypeScript" src="https://img.shields.io/badge/-TypeScript-007ACC?style=flat-square&logo=typescript&logoColor=white" />
 <img alt="Vite" src="https://img.shields.io/badge/-Vite-646CFF?style=flat-square&logo=vite&logoColor=white" />
-<img alt="Tailwind CSS" src="https://img.shields.io/badge/-Tailwind_CSS-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white" />
+<img alt="Tailwind CSS" src="https://img.shields.io/badge/-Tailwind_CSS-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white" /><br/>
 State Management<br/>
 <img alt="Redux Toolkit" src="https://img.shields.io/badge/-Redux_Toolkit-764ABC?style=flat-square&logo=redux&logoColor=white" />
-<img alt="React Query" src="https://img.shields.io/badge/-React_Query-FF4154?style=flat-square&logo=react-query&logoColor=white" />
+<img alt="React Query" src="https://img.shields.io/badge/-React_Query-FF4154?style=flat-square&logo=react-query&logoColor=white" /><br/>
 Routing<br/>
-<img alt="React Router" src="https://img.shields.io/badge/-React_Router-CA4245?style=flat-square&logo=react-router&logoColor=white" />
+<img alt="React Router" src="https://img.shields.io/badge/-React_Router-CA4245?style=flat-square&logo=react-router&logoColor=white" /><br/>
 Mock Backend<br/>
 <img alt="JSON Server" src="https://img.shields.io/badge/-JSON--Server-000000?style=flat-square&logo=json&logoColor=white" />
-<img alt="Glitch" src="https://img.shields.io/badge/-Glitch-EC1066?style=flat-square&logo=glitch&logoColor=white" />
+<img alt="Glitch" src="https://img.shields.io/badge/-Glitch-EC1066?style=flat-square&logo=glitch&logoColor=white" /><br/>
 Deployment<br/>
 <img alt="Vercel" src="https://img.shields.io/badge/-Vercel-000000?style=flat-square&logo=vercel&logoColor=white" />
 
@@ -51,25 +51,25 @@ Deployment<br/>
 [pennywise-eight.vercel.app](https://pennywise-eight.vercel.app/)
 
 ## 🛠️ Installation
-Clone Repository
+- Clone Repository
 ```bash
 git clone https://github.com/<your-username>/pennywise.git
 cd pennywise
 ```
 
-Install Dependencies
+- Install Dependencies
 ```bash
 pnpm install
 ```
 
-Environment Variables
+- Environment Variables
 Create a .env in the project root:
 ```bash
 VITE_API_BASE_URL=https://<your-glitch-subdomain>.glitch.me
 VITE_LOGIN_API_BASE_URL=https://<your-glitch-subdomain>.glitch.me
 ```
 
-Run in Development
+- Run in Development
 ```bash
 pnpm run dev
 ```
