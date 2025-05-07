@@ -25,6 +25,7 @@ State Management<br/>
 Routing<br/>
 <img alt="React Router" src="https://img.shields.io/badge/-React_Router-CA4245?style=flat-square&logo=react-router&logoColor=white" /><br/>
 Mock Backend<br/>
+<img alt="Axios" src="https://img.shields.io/badge/-Axios-5A29E4?style=flat-square&logo=axios&logoColor=white" />
 <img alt="JSON Server" src="https://img.shields.io/badge/-JSON--Server-000000?style=flat-square&logo=json&logoColor=white" />
 <img alt="Glitch" src="https://img.shields.io/badge/-Glitch-EC1066?style=flat-square&logo=glitch&logoColor=white" /><br/>
 Deployment<br/>
