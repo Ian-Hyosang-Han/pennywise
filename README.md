@@ -14,20 +14,20 @@ A simple personal expense management web application built with React, TypeScrip
 
 ## 📦 Tech Stack
 
-Frontend <br/>
+Frontend
 <img alt="React" src="https://img.shields.io/badge/-React-45b8d8?style=flat-square&logo=react&logoColor=white" />
 <img alt="TypeScript" src="https://img.shields.io/badge/-TypeScript-007ACC?style=flat-square&logo=typescript&logoColor=white" />
 <img alt="Tailwind CSS" src="https://img.shields.io/badge/-Tailwind_CSS-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white" /><br/>
-State Management<br/>
+State Management
 <img alt="Redux Toolkit" src="https://img.shields.io/badge/-Redux_Toolkit-764ABC?style=flat-square&logo=redux&logoColor=white" />
 <img alt="React Query" src="https://img.shields.io/badge/-React_Query-FF4154?style=flat-square&logo=react-query&logoColor=white" /><br/>
-Routing<br/>
+Routing
 <img alt="React Router" src="https://img.shields.io/badge/-React_Router-CA4245?style=flat-square&logo=react-router&logoColor=white" /><br/>
-Mock Backend<br/>
+Mock Backend
 <img alt="Axios" src="https://img.shields.io/badge/-Axios-5A29E4?style=flat-square&logo=axios&logoColor=white" />
 <img alt="JSON Server" src="https://img.shields.io/badge/-JSON--Server-000000?style=flat-square&logo=json&logoColor=white" />
 <img alt="Glitch" src="https://img.shields.io/badge/-Glitch-EC1066?style=flat-square&logo=glitch&logoColor=white" /><br/>
-Deployment<br/>
+Deployment
 <img alt="Vercel" src="https://img.shields.io/badge/-Vercel-000000?style=flat-square&logo=vercel&logoColor=white" />
 
 ## 🗂 Project Structure
