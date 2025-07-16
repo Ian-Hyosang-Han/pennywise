@@ -60,3 +60,5 @@ A simple personal expense management web application built with React, TypeScrip
 ## 🔗 Live Site
 
 [pennywise-eight.vercel.app](https://pennywise-eight.vercel.app/)
+
+- **GitHub JSON Server**: https://github.com/Ian-Hyosang-Han/expenses-json-server
