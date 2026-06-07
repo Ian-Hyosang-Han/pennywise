@@ -1,4 +1,101 @@
 {
-  "users": [],
-  "expenses": []
+  "users": [
+    {
+      "id": "7fec",
+      "username": "hhan330",
+      "password": "1111aaaa"
+    }
+  ],
+  "expenses": [
+    {
+      "id": "aea8ad91-7254-41a2-8d53-44689f602210",
+      "date": "2025-07-01",
+      "title": "Coffee",
+      "item": "Snacks",
+      "amount": 35,
+      "description": "coffee and snacks",
+      "createdBy": "hhan330",
+      "userId": "7fec"
+    },
+    {
+      "id": "8b18d7a1-91fc-44d1-bdd8-0b084c29bb95",
+      "date": "2025-07-10",
+      "title": "Gift",
+      "item": "Others",
+      "amount": 250,
+      "description": "gift for friend",
+      "createdBy": "hhan330",
+      "userId": "7fec"
+    },
+    {
+      "id": "48d1e837-e767-426e-86e8-711457d8035a",
+      "date": "2025-07-04",
+      "title": "massage",
+      "item": "Beauty",
+      "amount": 200,
+      "description": "massage shop",
+      "createdBy": "hhan330",
+      "userId": "7fec"
+    },
+    {
+      "id": "3d5f66ca-c8eb-44bc-871b-fe6c4b5b3d1a",
+      "date": "2025-07-05",
+      "title": "Books",
+      "item": "Books",
+      "amount": 100,
+      "description": "buy a book",
+      "createdBy": "hhan330",
+      "userId": "7fec"
+    },
+    {
+      "id": "deb0d747-95be-49c6-a9c2-4f805a578d5a",
+      "date": "2025-07-06",
+      "title": "shopping",
+      "item": "Shopping",
+      "amount": 300,
+      "description": "shopping",
+      "createdBy": "hhan330",
+      "userId": "7fec"
+    },
+    {
+      "id": "af9e086a-c5fb-4b0d-9152-33b87ebb8259",
+      "date": "2025-07-08",
+      "title": "dinner",
+      "item": "Food",
+      "amount": 150,
+      "description": "food",
+      "createdBy": "hhan330",
+      "userId": "7fec"
+    },
+    {
+      "id": "84e16651-c964-40a2-8e19-f32f397ca68d",
+      "date": "2025-07-11",
+      "title": "english class",
+      "item": "Education",
+      "amount": 500,
+      "description": "class",
+      "createdBy": "hhan330",
+      "userId": "7fec"
+    },
+    {
+      "id": "f3759a0b-ad51-485d-87f6-504494e52269",
+      "date": "2025-07-12",
+      "title": "gym",
+      "item": "Fitness",
+      "amount": 200,
+      "description": "resister gym",
+      "createdBy": "hhan330",
+      "userId": "7fec"
+    },
+    {
+      "id": "7c2cd7c8-d513-488b-83ff-c120a2a8fae1",
+      "date": "2025-07-14",
+      "title": "medical",
+      "item": "Medical",
+      "amount": 350,
+      "description": "medical test",
+      "createdBy": "hhan330",
+      "userId": "7fec"
+    }
+  ]
 }
